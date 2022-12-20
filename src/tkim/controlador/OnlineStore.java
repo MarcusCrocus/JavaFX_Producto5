@@ -40,18 +40,6 @@ public class OnlineStore extends Application  {
 	private TextField codigoArticulo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion;
 	@FXML
 	private Label lblCodigoArticulo, lblPrecioVenta, lblGastosEnvio, lblTiempoPreparacion;
-	/*@FXML
-	private TableView<Articulo> tvArticulos;
-	@FXML
-	private TableColumn<Articulo, String> codigoArticuloColumn = new TableColumn<>("Codigo de artículo");
-	@FXML
-	private TableColumn<Articulo, String> descripcionColumn = new TableColumn<>("Descripción");
-	@FXML
-	private TableColumn<Articulo, String> precioVentaColumn = new TableColumn<>("Precio de venta");
-	@FXML
-	private TableColumn<Articulo, String> gastosEnvioColumn = new TableColumn<>("Gastos de envío");
-	@FXML
-	private TableColumn<Articulo, String> tiempoPreparacionColumn = new TableColumn<>("Tiempo de preparación");*/
 	
 	@FXML
 	private Button boton;
