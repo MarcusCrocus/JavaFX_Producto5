@@ -32,7 +32,7 @@ public class OnlineStore extends Application  {
 
 	Scanner teclado = new Scanner(System.in);
 	Controlador contro = new Controlador();
-	
+	//Subido
 	//##############################FORMULARIO INSERTAR ARTICULOS##############################
 	@FXML
 	private BorderPane borderPane = new BorderPane();
