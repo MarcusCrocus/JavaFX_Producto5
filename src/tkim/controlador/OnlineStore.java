@@ -35,8 +35,6 @@ public class OnlineStore extends Application  {
 
 	//##############################FORMULARIO INSERTAR ARTICULOS##############################
 	@FXML
-	private BorderPane borderPane = new BorderPane();
-	@FXML
 	private TextField codigoArticulo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion;
 	@FXML
 	private Label lblCodigoArticulo, lblPrecioVenta, lblGastosEnvio, lblTiempoPreparacion;
@@ -75,6 +73,7 @@ public class OnlineStore extends Application  {
 	        }
 			break;
 		case "buttonShowArticle":
+			BorderPane borderPane = new BorderPane();
 			List<Articulo> articulos = contro.mostrarArticulos();
 
 			//El String que ponemos entre parentesis en setCellValueFactory es el nombre de la variable de clase de Articulo
@@ -142,7 +141,7 @@ public class OnlineStore extends Application  {
 				if (gastosEnvio.getText().contains(",")) {
             		gastosEnvio.setText(gastosEnvio.getText().replace(",", "."));
     			}
-				System.out.println(contro.addArticulo(codigoArticulo.getText(), descripcion.getText(), Float.parseFloat(precioVenta.getText()), Float.parseFloat(gastosEnvio.getText()), Integer.parseInt(tiempoPreparacion.getText())));
+				contro.addArticulo(codigoArticulo.getText(), descripcion.getText(), Float.parseFloat(precioVenta.getText()), Float.parseFloat(gastosEnvio.getText()), Integer.parseInt(tiempoPreparacion.getText()));
 				Alert mensajeConfirmacionModal = new Alert(AlertType.INFORMATION);
 				mensajeConfirmacionModal.setTitle("ARTICULOS");
 				mensajeConfirmacionModal.setHeaderText(null);
