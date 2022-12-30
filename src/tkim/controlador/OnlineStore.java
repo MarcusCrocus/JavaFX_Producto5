@@ -486,6 +486,8 @@ public class OnlineStore extends Application implements Initializable {
 		String botonClicado = boton.getText();
 		switch (botonClicado) {
 		case "Insertar articulo":
+			if (codigoArticulo.getText().equals("") && !descripcion.getText().equals("") && !precioVenta.getText().equals("") 
+					&& !gastosEnvio.getText().equals("") && !tiempoPreparacion.getText().equals("")) {
 			Boolean tiempoInferior = true;
 			Boolean existeArticulo = contro.existeArticulo(codigoArticulo.getText());
 			Boolean esPrecioVentaFloat = esFloat(precioVenta.getText()); // true es correcto
@@ -545,6 +547,13 @@ public class OnlineStore extends Application implements Initializable {
 				} else {
 					lblTiempoPreparacion.setText("");
 				}
+			}
+			}else {
+				Alert mensajeConfirmacionModal = new Alert(AlertType.INFORMATION);
+				mensajeConfirmacionModal.setTitle("ARTÍCULOS");
+				mensajeConfirmacionModal.setHeaderText(null);
+				mensajeConfirmacionModal.setContentText("Faltan campos por rellenar!");
+				mensajeConfirmacionModal.showAndWait();
 			}
 
 			break;
