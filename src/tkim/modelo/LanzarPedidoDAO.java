@@ -39,5 +39,10 @@ public class LanzarPedidoDAO {
 		IPedidoDAO dao = (IPedidoDAO) FactoryDAOs.getDAO("Pedido");
 		return dao.pedidosPendientes(nif);
 	}
+	
+	public List<Pedido> mostrarPedidos(){
+		IPedidoDAO dao = (IPedidoDAO) FactoryDAOs.getDAO("Pedido");
+		return dao.mostrarPedidos();
+	}
 
 }

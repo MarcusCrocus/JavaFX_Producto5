@@ -120,8 +120,8 @@ public abstract class Cliente {
 	}
 	@Override
 	public String toString() {
-		return "Cliente [nombre=" + nombre + ", domicilio=" + domicilio + ", nif=" + nif + ", email=" + email
-				+ ", tipoCliente()=" + tipoCliente() + ", calcAnual()=" + calcAnual() + ", descuentoEnv()="
-				+ descuentoEnv() + "]";
+		return "Nif = " + nif + ", Nombre del cliente = " + nombre + ", Domicilio = " + domicilio + ",  Email = " + email
+				+ ", Tipo de cliente = " + tipoCliente() + ", Cuota anual = " + calcAnual() + ", Descuento por envío = "
+				+ descuentoEnv();
 	}
 }

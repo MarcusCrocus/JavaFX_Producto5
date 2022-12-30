@@ -15,6 +15,7 @@ public Boolean existePedido(Integer codigo);
 	public List<Pedido> pedidosPendientes(String nif);
 	public int devolverTiempoPreparacion(String codigoArticulo);
 	public Pedido devolverPedido(int numeroPedido);
+	public List<Pedido> mostrarPedidos();
 
 	public List<Pedido> devolverPedidosXCliente(String nif);
 

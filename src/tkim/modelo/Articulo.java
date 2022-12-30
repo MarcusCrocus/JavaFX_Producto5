@@ -101,12 +101,8 @@ public class Articulo {
 	}
 	@Override
 	public String toString() {
-		return "Articulo [codigo=" + codigo + ", descripcion=" + descripcion + ", precioVenta=" + precioVenta
-				+ ", gastosEnvio=" + gastosEnvio + ", tiempoPreparacion=" + tiempoPreparacion + ", getCodigo()="
-				+ getCodigo() + ", getDescripcion()=" + getDescripcion() + ", getPrecioVenta()=" + getPrecioVenta()
-				+ ", getGastosEnvio()=" + getGastosEnvio() + ", getTiempoPreparacion()=" + getTiempoPreparacion()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
+		return "Código de articulo = " + codigo + ", Descripción = " + descripcion + ", Precio de venta = " + precioVenta
+				+ ", Gastos de envío = " + gastosEnvio + ", Tiempo de preparación = " + tiempoPreparacion;
 	}
 	
 	

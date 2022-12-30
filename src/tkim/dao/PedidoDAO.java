@@ -209,6 +209,26 @@ public class PedidoDAO implements IPedidoDAO {
 			return null;
 		}
 	}
+
+	@Override
+	public List<Pedido> mostrarPedidos() {
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		try {
+			//Creamos la query de select all indicandole con el .class la clase que queremos
+	        CriteriaQuery<Pedido> criteriaQuery = session.getCriteriaBuilder().createQuery(Pedido.class);
+	        criteriaQuery.from(Pedido.class);
+	        //Aqui los datos que nos ha devuelto lo metemos en una lista tipo arraylist
+	        List<Pedido> pedidos = session.createQuery(criteriaQuery).getResultList();
+	        //Cerramos la sesion
+	        session.close();
+	        //Y la devolvemos	
+			return pedidos;
+		} catch (RuntimeException re) {
+			System.out.println("fallo al mostrar los pedidos."+re);
+			return null;
+		}
+	}
 	
 		
 

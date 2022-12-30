@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Introduce el pedido" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tkim.controlador.OnlineStore">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+         <children>
+            <Label layoutX="17.0" layoutY="9.0" text="Codigo de pedido" />
+            <Label layoutX="17.0" layoutY="68.0" text="Unidades del pedido" />
+            <Label layoutX="280.0" layoutY="9.0" text="Cliente" />
+            <TextField fx:id="codigoPedido" layoutX="141.0" layoutY="5.0" onMouseDragExited="#ctb" prefHeight="25.0" prefWidth="78.0" />
+            <TextField fx:id="unidadesPedido" layoutX="142.0" layoutY="64.0" prefHeight="25.0" prefWidth="91.0" />
+            <Button fx:id="boton" layoutX="6.0" layoutY="335.0" mnemonicParsing="false" onAction="#submit" prefHeight="25.0" prefWidth="130.0" text="Insertar pedido" />
+            <Label layoutX="274.0" layoutY="68.0" text="Articulo" />
+            <ComboBox fx:id="cbClientes" layoutX="342.0" layoutY="5.0" onAction="#cambioTextoComboBoxCliente" prefWidth="150.0" />
+            <ComboBox fx:id="cbArticulos" layoutX="339.0" layoutY="64.0" onAction="#cambioTextoComboBoxArticulo" prefWidth="150.0" />
+            <Label fx:id="lblErrorCodigoPedido" layoutX="18.0" layoutY="32.0" prefHeight="17.0" prefWidth="20.0" visible="false" />
+            <Label fx:id="lblErrorUnidadesPedido" layoutX="17.0" layoutY="94.0" text="Label" visible="false" />
+            <Label layoutX="16.0" layoutY="111.0" text="Cliente escogido" />
+            <Label layoutX="350.0" layoutY="113.0" text="Artículo escogido" />
+            <Label layoutX="18.0" layoutY="137.0" text="NIF:" />
+            <Label layoutX="18.0" layoutY="163.0" text="NOMBRE:" />
+            <Label layoutX="18.0" layoutY="186.0" text="DOMICILIO:" />
+            <Label layoutX="18.0" layoutY="215.0" text="EMAIL" />
+            <Label layoutX="18.0" layoutY="241.0" text="TIPO DE CLIENTE:" />
+            <Label layoutX="18.0" layoutY="267.0" text="CUOTA ANUAL" />
+            <Label layoutX="350.0" layoutY="148.0" text="CÓDIGO ARTÍCULO:" />
+            <Label layoutX="350.0" layoutY="174.0" text="DESCRIPCIÓN:" />
+            <Label layoutX="350.0" layoutY="192.0" text="PRECIO DE VENTA:" />
+            <Label layoutX="350.0" layoutY="226.0" text="GASTOS DE ENVÍO:" />
+            <Label layoutX="350.0" layoutY="252.0" text="TIEMPO DE PREPARACIÓN:" />
+            <Label fx:id="labelNif" layoutX="142.0" layoutY="137.0" text="-" />
+            <Label fx:id="labelNombre" layoutX="142.0" layoutY="163.0" text="-" />
+            <Label fx:id="labelDomicilio" layoutX="142.0" layoutY="186.0" text="-" />
+            <Label fx:id="labelEmail" layoutX="142.0" layoutY="215.0" text="-" />
+            <Label fx:id="labelTC" layoutX="142.0" layoutY="241.0" text="-" />
+            <Label fx:id="labelCA" layoutX="142.0" layoutY="267.0" text="-" />
+            <Label fx:id="labelCodigoArticulo" layoutX="518.0" layoutY="148.0" text="-" />
+            <Label fx:id="labelDescripcion" layoutX="518.0" layoutY="174.0" text="-" />
+            <Label fx:id="labelPV" layoutX="518.0" layoutY="197.0" text="-" />
+            <Label fx:id="labelGE" layoutX="518.0" layoutY="226.0" text="-" />
+            <Label fx:id="labelTP" layoutX="518.0" layoutY="252.0" text="-" />
+            <ImageView fx:id="tkimImageView" fitHeight="38.0" fitWidth="52.0" layoutX="509.0" layoutY="309.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+            <Label layoutX="17.0" layoutY="289.0" text="DESCUENTO ENVÍO" />
+            <Label fx:id="labelDE" layoutX="142.0" layoutY="289.0" text="-" />
+         </children></AnchorPane>
+  </content>
+</TitledPane>

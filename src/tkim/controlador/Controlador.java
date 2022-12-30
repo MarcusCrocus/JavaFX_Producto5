@@ -71,6 +71,11 @@ public class Controlador {
 		
 	}
 	
+	public List<Pedido> mostrarPedidos(){
+		return lpd.mostrarPedidos();
+		
+	}
+	
 	public Boolean existeArticulo(String codigo) {
 		return lad.existeArticulo(codigo);
 		
