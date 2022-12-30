@@ -332,7 +332,7 @@ public class OnlineStore extends Application implements Initializable {
 								//pendientesButton.getStylesheets().add("src/controlador/style.css");
 								pendientesButton.setOnAction(event -> {
 									Cliente c = getTableView().getItems().get(0);
-									botonPendientes(c.getNif());
+									botonPendientes(c.getNif(), c.getNombre());
 								});
 								setGraphic(pendientesButton);
 								setText(null);
@@ -354,7 +354,7 @@ public class OnlineStore extends Application implements Initializable {
 								final Button enviadosButton = new Button("Ver");
 								enviadosButton.setOnAction(event -> {
 									Cliente c = getTableView().getItems().get(getIndex());
-									botonEnviados(c.getEmail());
+									botonEnviados(c.getEmail(), c.getNombre());
 								});
 								setGraphic(enviadosButton);
 								setText(null);
@@ -470,13 +470,13 @@ public class OnlineStore extends Application implements Initializable {
 		}
 	}
 
-	public void botonEnviados(String nif) {
+	public void botonEnviados(String nif, String nombre) {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setContentText("en metodo enviados Su correo es " + nif);
 		alert.show();
 	}
 
-	public void botonPendientes(String nif) {
+	public void botonPendientes(String nif, String nombre) {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setContentText("en metodo pendientes Su correo es " + nif);
 		alert.show();
