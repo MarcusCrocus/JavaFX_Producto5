@@ -215,8 +215,10 @@ public class OnlineStore extends Application implements Initializable {
 			}
 			borderPaneClientes.setCenter(tvClientes);
 
-			Scene sceneClientesTodos = new Scene(borderPaneClientes);
+			Scene sceneClientesTodos = new Scene(borderPaneClientes, 900, 300);
 			Stage stageClientesTodos = new Stage();
+			String styleClientesTodos = getClass().getResource("style.css").toExternalForm();
+			sceneClientesTodos.getStylesheets().add(styleClientesTodos);
 			stageClientesTodos.setTitle("CLIENTES");
 			stageClientesTodos.setScene(sceneClientesTodos);
 			stageClientesTodos.show();
@@ -259,6 +261,8 @@ public class OnlineStore extends Application implements Initializable {
 
 			Scene sceneClientesEstandar = new Scene(borderPaneClientesEstandar);
 			Stage stageClientesEstandar = new Stage();
+			String styleClientesEstandar = getClass().getResource("style.css").toExternalForm();
+			sceneClientesEstandar.getStylesheets().add(styleClientesEstandar);
 			stageClientesEstandar.setTitle("CLIENTES ESTANDAR");
 			stageClientesEstandar.setScene(sceneClientesEstandar);
 			stageClientesEstandar.show();
@@ -356,8 +360,8 @@ public class OnlineStore extends Application implements Initializable {
 								final Button pendientesButton = new Button("Ver");
 								//pendientesButton.getStylesheets().add("src/controlador/style.css");
 								pendientesButton.setOnAction(event -> {
-									Cliente c = getTableView().getItems().get(0);
-									botonPendientes(c.getNif(), c.getNombre());
+									Cliente c = getTableView().getItems().get(getIndex());
+									botonPendientes(c);
 								});
 								setGraphic(pendientesButton);
 								setText(null);
@@ -379,7 +383,7 @@ public class OnlineStore extends Application implements Initializable {
 								final Button enviadosButton = new Button("Ver");
 								enviadosButton.setOnAction(event -> {
 									Cliente c = getTableView().getItems().get(getIndex());
-									botonEnviados(c.getEmail(), c.getNombre());
+									botonEnviados(c);
 								});
 								setGraphic(enviadosButton);
 								setText(null);
@@ -495,16 +499,99 @@ public class OnlineStore extends Application implements Initializable {
 		}
 	}
 
-	public void botonEnviados(String nif, String nombre) {
-		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.setContentText("en metodo enviados Su correo es " + nif);
-		alert.show();
+	public void botonEnviados(Cliente c) {
+		BorderPane borderPanePedidos = new BorderPane();
+        TableView<Pedido> tvPedidosPendientescliente = new TableView<Pedido>();
+        TableColumn<Pedido, Integer> codigoPedido = new TableColumn<>("Código Pedido");
+        codigoPedido.setCellValueFactory(new PropertyValueFactory<>("numero_pedido"));
+        TableColumn<Pedido, Integer> unidadesPedido = new TableColumn<>("Unidades");
+        unidadesPedido.setCellValueFactory(new PropertyValueFactory<>("unidadesPedido"));
+        TableColumn<Pedido, Date> fechaHoraPedido = new TableColumn<>("Fecha del pedido");
+        fechaHoraPedido.setCellValueFactory(new PropertyValueFactory<>("fechaHoraPedido"));
+        TableColumn<Pedido, Integer> totalPedido = new TableColumn<>("Total del pedido");
+        totalPedido.setCellValueFactory(new PropertyValueFactory<>("totalPedido"));
+        TableColumn<Pedido, String> articuloPedido = new TableColumn<>("Artículo del pedido");
+        articuloPedido.setCellValueFactory(new PropertyValueFactory<>("articulo"));
+        TableColumn<Pedido, String> descripcionArticulo = new TableColumn<>("Descripcion artículo");
+        tvPedidosPendientescliente.getColumns().add(codigoPedido);
+        tvPedidosPendientescliente.getColumns().add(unidadesPedido);
+        tvPedidosPendientescliente.getColumns().add(fechaHoraPedido);
+        tvPedidosPendientescliente.getColumns().add(totalPedido);
+        tvPedidosPendientescliente.getColumns().add(articuloPedido);
+        tvPedidosPendientescliente.getColumns().add(descripcionArticulo);
+        
+        Callback<TableColumn<Pedido, String>, TableCell<Pedido, String>> cellFactoryPendientes = (param) -> {
+			final TableCell<Pedido, String> cell = new TableCell<Pedido, String>() {
+				@Override
+				public void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+					if (empty) {
+						setGraphic(null);
+						setText(null);
+					} else {
+						/*Articulo a = contro.buscarArticulo("a1");
+						setGraphic(a.getDescripcion());*/
+						setText(null);
+					}
+				}
+			};
+			return cell;
+		};
+        
+        tvPedidosPendientescliente.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        List<Pedido> pedidos = contro.mostrarPedEnviados(c.getNif());
+        ObservableList<Pedido> listPedidosXcliente = FXCollections.observableArrayList();
+        listPedidosXcliente.addAll(pedidos);
+        tvPedidosPendientescliente.setItems(listPedidosXcliente);
+        borderPanePedidos.setCenter(tvPedidosPendientescliente);
+        Scene sceneClientesT = new Scene(borderPanePedidos);
+        Stage stageClientesT = new Stage();
+        String  style= getClass().getResource("style.css").toExternalForm();
+        sceneClientesT.getStylesheets().add(style);
+        stageClientesT.setTitle("PEDIDOS ENVIADOS DE " + c.getNombre() + " con NIF " + c.getNif());
+        stageClientesT.setScene(sceneClientesT);
+        stageClientesT.show();
 	}
 
-	public void botonPendientes(String nif, String nombre) {
-		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.setContentText("en metodo pendientes Su correo es " + nif);
-		alert.show();
+	public void botonPendientes(Cliente c) {
+		BorderPane borderPanePedidos = new BorderPane();
+		
+		TableView<Pedido> tvPedidosPendientescliente = new TableView<Pedido>();
+		TableColumn<Pedido, Integer> codigoPedido = new TableColumn<>("Código Pedido");
+		codigoPedido.setCellValueFactory(new PropertyValueFactory<>("numero_pedido"));
+		TableColumn<Pedido, Integer> unidadesPedido = new TableColumn<>("Unidades");
+		unidadesPedido.setCellValueFactory(new PropertyValueFactory<>("unidadesPedido"));
+		TableColumn<Pedido, Date> fechaHoraPedido = new TableColumn<>("Fecha del pedido");
+		fechaHoraPedido.setCellValueFactory(new PropertyValueFactory<>("fechaHoraPedido"));
+		TableColumn<Pedido, Integer> totalPedido = new TableColumn<>("Total del pedido");
+		totalPedido.setCellValueFactory(new PropertyValueFactory<>("totalPedido"));
+		TableColumn<Pedido, String> clientePedido = new TableColumn<>("Cliente del pedido");
+		clientePedido.setCellValueFactory(new PropertyValueFactory<>("cliente"));
+		TableColumn<Pedido, String> articuloPedido = new TableColumn<>("Artículo del pedido");
+		articuloPedido.setCellValueFactory(new PropertyValueFactory<>("articulo"));
+		
+
+		tvPedidosPendientescliente.getColumns().add(codigoPedido);
+		tvPedidosPendientescliente.getColumns().add(unidadesPedido);
+		tvPedidosPendientescliente.getColumns().add(fechaHoraPedido);
+		tvPedidosPendientescliente.getColumns().add(totalPedido);
+		tvPedidosPendientescliente.getColumns().add(clientePedido);
+		tvPedidosPendientescliente.getColumns().add(articuloPedido);
+		tvPedidosPendientescliente.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		
+		List<Pedido> pedidosPendientes = contro.mostrarPedPendientes(c.getNif());
+		ObservableList<Pedido> listPedidosXcliente = FXCollections.observableArrayList();
+		listPedidosXcliente.addAll(pedidosPendientes);
+		
+		tvPedidosPendientescliente.setItems(listPedidosXcliente);
+		borderPanePedidos.setCenter(tvPedidosPendientescliente);
+		Scene sceneClientesT = new Scene(borderPanePedidos);
+		Stage stageClientesT = new Stage();
+		String  style= getClass().getResource("style.css").toExternalForm();
+		sceneClientesT.getStylesheets().add(style);
+		stageClientesT.setTitle("PEDIDOS PENDIENTES DE " + c.getNombre() + " con NIF " + c.getNif());
+		stageClientesT.setScene(sceneClientesT);
+		stageClientesT.show();
 	}
 
 	public void submit(ActionEvent event) {
@@ -616,6 +703,8 @@ public class OnlineStore extends Application implements Initializable {
 				if (!codigoArticulo && !unidadesCorrectas) {
 					contro.addPedido(Integer.parseInt(codigoPedido.getText()), numeroUnidades, LocalDateTime.now(),
 							c.getNif(), a.getCodigo());
+					lblErrorCodigoPedido.setText("");
+					lblErrorUnidadesPedido.setText("");
 					Alert mensajeConfirmacionModal = new Alert(AlertType.INFORMATION);
 					mensajeConfirmacionModal.setTitle("PEDIDOS");
 					mensajeConfirmacionModal.setHeaderText(null);
@@ -667,7 +756,8 @@ public class OnlineStore extends Application implements Initializable {
 				if (!extisteCliente && existeChar) {
 					
 					contro.addCliente(nombre.getText(), domicilio.getText(), nif.getText(), email.getText(), tipoCliente);
-					
+					lblNif.setText("");
+					lblEmail.setText("");
 					Alert mensajeConfirmacionModal = new Alert(AlertType.INFORMATION);
 					mensajeConfirmacionModal.setTitle("CLIENTE");
 					mensajeConfirmacionModal.setHeaderText(null);
@@ -689,7 +779,7 @@ public class OnlineStore extends Application implements Initializable {
 							
 							lblEmail.setTextFill(Color.web("red"));
 							lblEmail.setVisible(true);
-							lblEmail.setText("campo de email no puede estar vacio");
+							lblEmail.setText("El email debe contener '@'");
 							
 							throw new Exceptions("El email debe contener '@' ");
 
