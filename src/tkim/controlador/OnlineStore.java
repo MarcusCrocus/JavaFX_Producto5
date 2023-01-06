@@ -644,8 +644,7 @@ public class OnlineStore extends Application implements Initializable {
 		case "Insertar Cliente":
 			
 			if (!nif.getText().equals("") && !nombre.getText().equals("") && !domicilio.getText().equals("") 
-					&& !email.getText().equals("") && !lblTipoCliente.getSelectionModel().isEmpty()&& !cuota_anual.getText().equals("")
-					&& !descuento_envio.getText().equals("")) {
+					&& !email.getText().equals("") && !lblTipoCliente.getSelectionModel().isEmpty()) {
 				
 				Boolean extisteCliente = contro.existeCliente(nif.getText());
 				Boolean existeChar = email.getText().contains("@"); //true
