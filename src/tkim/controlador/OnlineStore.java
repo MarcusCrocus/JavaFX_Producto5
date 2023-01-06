@@ -512,13 +512,13 @@ public class OnlineStore extends Application implements Initializable {
         totalPedido.setCellValueFactory(new PropertyValueFactory<>("totalPedido"));
         TableColumn<Pedido, String> articuloPedido = new TableColumn<>("Artículo del pedido");
         articuloPedido.setCellValueFactory(new PropertyValueFactory<>("articulo"));
-        TableColumn<Pedido, String> descripcionArticulo = new TableColumn<>("Descripcion artículo");
+        TableColumn<Pedido, String> verArticulo = new TableColumn<>("Mostrar");
         tvPedidosPendientescliente.getColumns().add(codigoPedido);
         tvPedidosPendientescliente.getColumns().add(unidadesPedido);
         tvPedidosPendientescliente.getColumns().add(fechaHoraPedido);
         tvPedidosPendientescliente.getColumns().add(totalPedido);
         tvPedidosPendientescliente.getColumns().add(articuloPedido);
-        tvPedidosPendientescliente.getColumns().add(descripcionArticulo);
+        tvPedidosPendientescliente.getColumns().add(verArticulo);
         
         Callback<TableColumn<Pedido, String>, TableCell<Pedido, String>> cellFactoryPendientes = (param) -> {
 			final TableCell<Pedido, String> cell = new TableCell<Pedido, String>() {
@@ -529,15 +529,19 @@ public class OnlineStore extends Application implements Initializable {
 						setGraphic(null);
 						setText(null);
 					} else {
-						/*Articulo a = contro.buscarArticulo("a1");
-						setGraphic(a.getDescripcion());*/
+						final Button articuloPedido = new Button("Artículo del pedido");
+						articuloPedido.setOnAction(event -> {
+							Pedido p = getTableView().getItems().get(getIndex());
+							mostrarArticuloPedido(p);
+						});
+						setGraphic(articuloPedido);
 						setText(null);
 					}
 				}
 			};
 			return cell;
 		};
-        
+		verArticulo.setCellFactory(cellFactoryPendientes);
         tvPedidosPendientescliente.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         List<Pedido> pedidos = contro.mostrarPedEnviados(c.getNif());
         ObservableList<Pedido> listPedidosXcliente = FXCollections.observableArrayList();
@@ -569,14 +573,36 @@ public class OnlineStore extends Application implements Initializable {
 		clientePedido.setCellValueFactory(new PropertyValueFactory<>("cliente"));
 		TableColumn<Pedido, String> articuloPedido = new TableColumn<>("Artículo del pedido");
 		articuloPedido.setCellValueFactory(new PropertyValueFactory<>("articulo"));
-		
-
+		TableColumn<Pedido, String> verArticulo = new TableColumn<>("Mostrar");
+		Callback<TableColumn<Pedido, String>, TableCell<Pedido, String>> cellFactoryPendientes = (param) -> {
+			final TableCell<Pedido, String> cell = new TableCell<Pedido, String>() {
+				@Override
+				public void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+					if (empty) {
+						setGraphic(null);
+						setText(null);
+					} else {
+						final Button articuloPedido = new Button("Artículo del pedido");
+						articuloPedido.setOnAction(event -> {
+							Pedido p = getTableView().getItems().get(getIndex());
+							mostrarArticuloPedido(p);
+						});
+						setGraphic(articuloPedido);
+						setText(null);
+					}
+				}
+			};
+			return cell;
+		};
+		verArticulo.setCellFactory(cellFactoryPendientes);
 		tvPedidosPendientescliente.getColumns().add(codigoPedido);
 		tvPedidosPendientescliente.getColumns().add(unidadesPedido);
 		tvPedidosPendientescliente.getColumns().add(fechaHoraPedido);
 		tvPedidosPendientescliente.getColumns().add(totalPedido);
 		tvPedidosPendientescliente.getColumns().add(clientePedido);
 		tvPedidosPendientescliente.getColumns().add(articuloPedido);
+		tvPedidosPendientescliente.getColumns().add(verArticulo);
 		tvPedidosPendientescliente.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		
 		List<Pedido> pedidosPendientes = contro.mostrarPedPendientes(c.getNif());
@@ -594,6 +620,19 @@ public class OnlineStore extends Application implements Initializable {
 		stageClientesT.show();
 	}
 
+	public void mostrarArticuloPedido(Pedido p) {
+		Articulo a = contro.buscarArticulo(p.getArticulo());
+		Alert mensajeConfirmacionModal = new Alert(AlertType.INFORMATION);
+		mensajeConfirmacionModal.setTitle("ARTÍCULO DEL PEDIDO");
+		mensajeConfirmacionModal.setHeaderText(null);
+		mensajeConfirmacionModal.setContentText("Código artículo: " + a.getCodigo() + 
+												"\nDescripcion: " +a.getDescripcion() +
+												"\nPrecio de venta: " + a.getPrecioVenta() +
+												"\nGastos de envío: " + a.getGastosEnvio() +
+												"\nTiempo de preparación: " + a.getTiempoPreparacion());
+		mensajeConfirmacionModal.showAndWait();
+	}
+	
 	public void submit(ActionEvent event) {
 		String botonClicado = boton.getText();
 		switch (botonClicado) {
