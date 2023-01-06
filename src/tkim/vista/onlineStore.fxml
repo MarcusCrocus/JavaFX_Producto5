@@ -8,7 +8,7 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="364.0" prefWidth="540.0" stylesheets="@../controlador/styleMenuPrincipal.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tkim.controlador.OnlineStore">
    <children>
-      <Button fx:id="buttonShowArticle" layoutX="420.0" layoutY="170.0" mnemonicParsing="false" onAction="#handleButtonPress" text="Mostrar artículos" />
+      <Button fx:id="buttonShowArticle" layoutX="396.0" layoutY="85.0" mnemonicParsing="false" onAction="#handleButtonPress" text="Mostrar artículos" />
       <Button fx:id="buttonShowClientsAll" layoutX="388.0" layoutY="267.0" mnemonicParsing="false" onAction="#handleButtonPress" text="Mostrar clientes" />
       <Button fx:id="buttonShowStandardClients" layoutX="41.0" layoutY="267.0" mnemonicParsing="false" onAction="#handleButtonPress" text="Clientes estandar" />
       <Button fx:id="buttonShowPremiumClients" layoutX="14.0" layoutY="170.0" mnemonicParsing="false" onAction="#handleButtonPress" text="Clientes Premium" />
@@ -19,11 +19,11 @@
          </font>
       </Button>
       <Button fx:id="showPedidos" layoutX="143.0" layoutY="311.0" mnemonicParsing="false" onAction="#handleButtonPress" text="Eliminar pedido" />
-      <Button fx:id="buttonInsertPedido" layoutX="388.0" layoutY="85.0" mnemonicParsing="false" onAction="#handleButtonPress" text="Crear pedido" />
+      <Button fx:id="buttonInsertPedido" layoutX="431.0" layoutY="170.0" mnemonicParsing="false" onAction="#handleButtonPress" text="Crear pedido" />
       <Button layoutX="59.0" layoutY="85.0" mnemonicParsing="false" text="Crear cliente" />
-      <ImageView fx:id="tkimImageView" fitHeight="204.0" fitWidth="200.0" layoutX="170.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="tkimImageView" fitHeight="204.0" fitWidth="200.0" layoutX="192.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../tkim.png" />
+            <Image url="@../../../tkim.jpg" />
          </image></ImageView>
    </children>
 </AnchorPane>

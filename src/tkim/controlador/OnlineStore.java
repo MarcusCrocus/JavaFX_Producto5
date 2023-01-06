@@ -47,7 +47,7 @@ public class OnlineStore extends Application implements Initializable {
 	@FXML
 	private ImageView tkimImageView;
 	@FXML
-	private Image myImage = new Image(getClass().getResourceAsStream("tkim.png"));
+	private Image myImage = new Image(getClass().getResourceAsStream("tkim.jpg"));
 
 	// ##############################FORMULARIO INSERTAR ARTICULOS##############################
 	@FXML
@@ -147,8 +147,10 @@ public class OnlineStore extends Application implements Initializable {
 			}
 			borderPane.setCenter(tvArticulos);
 
-			Scene scene = new Scene(borderPane);
+			Scene scene = new Scene(borderPane, 690, 300);
 			Stage stage = new Stage();
+			String styleArticulos = getClass().getResource("style.css").toExternalForm();
+			scene.getStylesheets().add(styleArticulos);
 			stage.setTitle("ARTICULOS");
 			stage.setScene(scene);
 			stage.show();
@@ -486,7 +488,7 @@ public class OnlineStore extends Application implements Initializable {
 		String botonClicado = boton.getText();
 		switch (botonClicado) {
 		case "Insertar articulo":
-			if (codigoArticulo.getText().equals("") && !descripcion.getText().equals("") && !precioVenta.getText().equals("") 
+			if (!codigoArticulo.getText().equals("") && !descripcion.getText().equals("") && !precioVenta.getText().equals("") 
 					&& !gastosEnvio.getText().equals("") && !tiempoPreparacion.getText().equals("")) {
 			Boolean tiempoInferior = true;
 			Boolean existeArticulo = contro.existeArticulo(codigoArticulo.getText());
@@ -511,6 +513,10 @@ public class OnlineStore extends Application implements Initializable {
 				contro.addArticulo(codigoArticulo.getText(), descripcion.getText(),
 						Float.parseFloat(precioVenta.getText()), Float.parseFloat(gastosEnvio.getText()),
 						Integer.parseInt(tiempoPreparacion.getText()));
+				lblCodigoArticulo.setText("");
+				lblPrecioVenta.setText("");
+				lblGastosEnvio.setText("");
+				lblTiempoPreparacion.setText("");
 				Alert mensajeConfirmacionModal = new Alert(AlertType.INFORMATION);
 				mensajeConfirmacionModal.setTitle("ARTICULOS");
 				mensajeConfirmacionModal.setHeaderText(null);

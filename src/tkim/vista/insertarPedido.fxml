@@ -21,7 +21,7 @@
             <Label layoutX="274.0" layoutY="68.0" text="Articulo" />
             <ComboBox fx:id="cbClientes" layoutX="342.0" layoutY="5.0" onAction="#cambioTextoComboBoxCliente" prefWidth="150.0" />
             <ComboBox fx:id="cbArticulos" layoutX="339.0" layoutY="64.0" onAction="#cambioTextoComboBoxArticulo" prefWidth="150.0" />
-            <Label fx:id="lblErrorCodigoPedido" layoutX="18.0" layoutY="32.0" prefHeight="17.0" prefWidth="20.0" visible="false" />
+            <Label fx:id="lblErrorCodigoPedido" layoutX="18.0" layoutY="32.0" prefHeight="17.0" prefWidth="20.0" text="Label" visible="false" />
             <Label fx:id="lblErrorUnidadesPedido" layoutX="17.0" layoutY="94.0" text="Label" visible="false" />
             <Label layoutX="16.0" layoutY="111.0" text="Cliente escogido" />
             <Label layoutX="350.0" layoutY="113.0" text="Artículo escogido" />
