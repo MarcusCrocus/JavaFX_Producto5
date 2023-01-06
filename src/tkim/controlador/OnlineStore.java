@@ -49,6 +49,17 @@ public class OnlineStore extends Application implements Initializable {
 	@FXML
 	private Image myImage = new Image(getClass().getResourceAsStream("tkim.jpg"));
 
+	
+	// ##############################FORMULARIO INSERTAR CLIENTES##############################
+	@FXML
+	private Label lblNif, lblNombre, lblDomicilio, lblEmail, lblCuota, lblDescuento;
+	@FXML
+	private TextField nif, nombre, domicilio, email,cuota_anual, descuento_envio;
+	
+	@FXML
+	private ComboBox<String> lblTipoCliente = new ComboBox<String>();
+	
+
 	// ##############################FORMULARIO INSERTAR ARTICULOS##############################
 	@FXML
 	private TextField codigoArticulo, descripcion, precioVenta, gastosEnvio, tiempoPreparacion;
@@ -92,6 +103,18 @@ public class OnlineStore extends Application implements Initializable {
 		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
 		String nameButton = ((Button) event.getSource()).getId();
 		switch (nameButton) {
+		case "btnCrearCliente":
+			try {
+
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../vista/insertarCliente.fxml"));
+				Parent root1 = (Parent) fxmlLoader.load();
+				Stage stage = new Stage();
+				stage.setScene(new Scene(root1));
+				stage.show();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
 		case "buttonInsertArticle":
 			try {
 
@@ -494,6 +517,7 @@ public class OnlineStore extends Application implements Initializable {
 			Boolean existeArticulo = contro.existeArticulo(codigoArticulo.getText());
 			Boolean esPrecioVentaFloat = esFloat(precioVenta.getText()); // true es correcto
 			Boolean esGastosEnvioFloat = esFloat(gastosEnvio.getText()); // true es correcto
+			
 			if (Integer.parseInt(tiempoPreparacion.getText()) < 120) {
 				try {
 					tiempoInferior = false;
@@ -621,6 +645,70 @@ public class OnlineStore extends Application implements Initializable {
 				mensajeConfirmacionModal.showAndWait();
 			}
 			break;
+		case "Insertar Cliente":
+			
+			if (!nif.getText().equals("") && !nombre.getText().equals("") && !domicilio.getText().equals("") 
+					&& !email.getText().equals("") && !lblTipoCliente.getSelectionModel().isEmpty()) {
+				
+				Boolean extisteCliente = contro.existeCliente(nif.getText());
+				Boolean existeChar = email.getText().contains("@"); //true
+//				String getName = nombre.getText();
+//				String getDomicilio = domicilio.getText(); //false
+//				String getEmail = email.getText();
+				String getTipo_cliente = lblTipoCliente.getValue();
+				
+				String tipoCliente = "2";
+				
+				
+				if(getTipo_cliente == "Estandar") {
+					tipoCliente = "1";
+				}
+					
+				if (!extisteCliente && existeChar) {
+					
+					contro.addCliente(nombre.getText(), domicilio.getText(), nif.getText(), email.getText(), tipoCliente);
+					
+					Alert mensajeConfirmacionModal = new Alert(AlertType.INFORMATION);
+					mensajeConfirmacionModal.setTitle("CLIENTE");
+					mensajeConfirmacionModal.setHeaderText(null);
+					mensajeConfirmacionModal.setContentText("El Cliente has ido introduciodo correctamente!");
+
+					mensajeConfirmacionModal.showAndWait();
+					
+				} else {
+					if (extisteCliente) {
+						lblNif.setTextFill(Color.web("red"));
+						lblNif.setVisible(true);
+						lblNif.setText("El cliente ya existe");
+					} else {
+						lblNif.setText("");
+					}
+
+					if (!existeChar) {
+						try {
+							
+							lblEmail.setTextFill(Color.web("red"));
+							lblEmail.setVisible(true);
+							lblEmail.setText("campo de email no puede estar vacio");
+							
+							throw new Exceptions("El email debe contener '@' ");
+
+						} catch (Exception e) {
+							e.getMessage();
+						}
+					}
+
+				}	
+					
+				
+			}else {
+				Alert mensajeConfirmacionModal = new Alert(AlertType.INFORMATION);
+				mensajeConfirmacionModal.setTitle("CLIENTES");
+				mensajeConfirmacionModal.setHeaderText(null);
+				mensajeConfirmacionModal.setContentText("Faltan campos por rellenar!");
+				mensajeConfirmacionModal.showAndWait();
+			}
+		
 		default:
 			break;
 		}
@@ -678,7 +766,12 @@ public class OnlineStore extends Application implements Initializable {
 		olArticulos.addAll(articulos);
 		cbClientes.setItems(olClientes);
 		cbArticulos.setItems(olArticulos);
-
+		
+		ObservableList<String> comboBoxItems = FXCollections.observableArrayList();
+		comboBoxItems.add("Estandar");
+		comboBoxItems.add("Premium");
+		lblTipoCliente.setItems(comboBoxItems);
+		
 	}
 	
 	public void cambioTextoComboBoxCliente(ActionEvent event) {
