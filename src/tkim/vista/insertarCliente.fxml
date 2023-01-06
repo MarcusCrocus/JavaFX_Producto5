@@ -18,15 +18,11 @@
       <TextField fx:id="nombre" layoutX="125.0" layoutY="39.0" prefHeight="26.0" prefWidth="102.0" />
       <TextField fx:id="domicilio" layoutX="125.0" layoutY="75.0" prefHeight="26.0" prefWidth="102.0" />
       <TextField fx:id="email" layoutX="125.0" layoutY="117.0" prefHeight="26.0" prefWidth="102.0" />
-      <Button fx:id="boton" layoutX="14.0" layoutY="266.0" mnemonicParsing="false" onAction="#submit" prefHeight="25.0" prefWidth="130.0" text="Insertar Cliente" />
+      <Button fx:id="boton" layoutX="14.0" layoutY="220.0" mnemonicParsing="false" onAction="#submit" prefHeight="25.0" prefWidth="130.0" text="Insertar Cliente" />
       <Label fx:id="lblNif" layoutX="242.0" layoutY="9.0" prefHeight="18.0" prefWidth="228.0" text="Label" visible="false" />
       <Label fx:id="lblNombre" layoutX="242.0" layoutY="41.0" prefHeight="18.0" prefWidth="228.0" text="Label" visible="false" />
       <Label fx:id="lblDomicilio" layoutX="243.0" layoutY="79.0" prefHeight="18.0" prefWidth="228.0" text="Label" visible="false" />
       <Label fx:id="lblEmail" layoutX="243.0" layoutY="122.0" prefHeight="18.0" prefWidth="228.0" text="Label" visible="false" />
-      <Label layoutX="17.0" layoutY="213.0" text="Cuota" />
-      <TextField fx:id="cuota_anual" layoutX="62.0" layoutY="208.0" prefHeight="26.0" prefWidth="54.0" />
-      <Label layoutX="130.0" layoutY="213.0" text="Descuento" />
-      <TextField fx:id="descuento_envio" layoutX="196.0" layoutY="209.0" prefHeight="18.0" prefWidth="67.0" />
       <ImageView fx:id="tkimImageView" fitHeight="150.0" fitWidth="200.0" layoutX="257.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" visible="false" />
       <ComboBox fx:id="lblTipoCliente" layoutX="121.0" layoutY="161.0" prefWidth="150.0" />
    </children>
