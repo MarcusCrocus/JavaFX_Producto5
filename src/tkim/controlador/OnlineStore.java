@@ -14,8 +14,10 @@ import tkim.modelo.Cliente;
 import tkim.modelo.Exceptions;
 import tkim.modelo.Pedido;
 import javafx.application.Application;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swt.FXCanvas;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,13 +31,16 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -399,7 +404,7 @@ public class OnlineStore extends Application implements Initializable {
 				enviadosButton.setCellFactory(cellFactoryEnviados);
 				tvPedidosPendientescliente.setItems(listPedidosXcliente);
 				borderPanePedidosXcliente.setCenter(tvPedidosPendientescliente);
-				Scene sceneClientesT = new Scene(borderPanePedidosXcliente);
+				Scene sceneClientesT = new Scene(borderPanePedidosXcliente,1250,300);
 				Stage stageClientesT = new Stage();
 				String styleClientesPedidos = getClass().getResource("style.css").toExternalForm();
 				sceneClientesT.getStylesheets().add(styleClientesPedidos);
@@ -574,6 +579,15 @@ public class OnlineStore extends Application implements Initializable {
 		TableColumn<Pedido, String> articuloPedido = new TableColumn<>("Artículo del pedido");
 		articuloPedido.setCellValueFactory(new PropertyValueFactory<>("articulo"));
 		TableColumn<Pedido, String> verArticulo = new TableColumn<>("Mostrar");
+		/*verArticulo.setCellValueFactory(new Callback<CellDataFeatures<Pedido, String>, ObservableValue<String>>() {
+		     public ObservableValue<String> call(CellDataFeatures<Pedido, String> p) {
+		         // p.getValue() returns the Person instance for a particular TableView row
+		    	 Articulo a = contro.buscarArticulo(p.getValue().getArticulo());
+		         return a.getDescripcion();
+		     }
+		  });*/
+		
+		
 		Callback<TableColumn<Pedido, String>, TableCell<Pedido, String>> cellFactoryPendientes = (param) -> {
 			final TableCell<Pedido, String> cell = new TableCell<Pedido, String>() {
 				@Override
@@ -611,7 +625,7 @@ public class OnlineStore extends Application implements Initializable {
 		
 		tvPedidosPendientescliente.setItems(listPedidosXcliente);
 		borderPanePedidos.setCenter(tvPedidosPendientescliente);
-		Scene sceneClientesT = new Scene(borderPanePedidos);
+		Scene sceneClientesT = new Scene(borderPanePedidos,1000,300);
 		Stage stageClientesT = new Stage();
 		String  style= getClass().getResource("style.css").toExternalForm();
 		sceneClientesT.getStylesheets().add(style);
@@ -622,6 +636,8 @@ public class OnlineStore extends Application implements Initializable {
 
 	public void mostrarArticuloPedido(Pedido p) {
 		Articulo a = contro.buscarArticulo(p.getArticulo());
+
+		
 		Alert mensajeConfirmacionModal = new Alert(AlertType.INFORMATION);
 		mensajeConfirmacionModal.setTitle("ARTÍCULO DEL PEDIDO");
 		mensajeConfirmacionModal.setHeaderText(null);

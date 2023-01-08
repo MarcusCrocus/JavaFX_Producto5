@@ -18,7 +18,7 @@ import tkim.modelo.Pedido;
 
 /**
  * Java based configuration
- * @author ramesh Fadatare
+ * @author tkim
  *
  */
 public class HibernateUtil {
